@@ -5,6 +5,8 @@ import { BsInfoCircle } from 'react-icons/bs'
 import { Spinner } from './LoadingSpinner'
 import { ethers } from 'ethers'
 export const HomePage = () => {
+  const provider = new ethers.providers.Web3Provider(window.ethereum)
+  let signer
   const handleSubmit = (e) => {
     e.preventDefault()
   }
@@ -36,9 +38,10 @@ export const HomePage = () => {
   ]
   const commonStyles =
     'min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white'
-  const connectWalet = () => {
-    ethers.connectWalet()
+  const connectWalet = async () => {
+    // ethers.connectWalet()
     console.log(`Connecting to Wallet`)
+    signer = await provider.getSigner()
   }
   return (
     <div className="flex w-full justify-center items-center">
