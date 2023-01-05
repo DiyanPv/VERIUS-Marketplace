@@ -5,6 +5,9 @@ import { BsInfoCircle } from 'react-icons/bs'
 import { Spinner } from './LoadingSpinner'
 import { ethers } from 'ethers'
 export const HomePage = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  }
   const InputArray = [
     {
       placeholder: 'Address To',
@@ -39,7 +42,7 @@ export const HomePage = () => {
   }
   return (
     <div className="flex w-full justify-center items-center">
-      <div className="flex md:flex-row flex-col items-start justify-between md:p-20 py-12 px-4">
+      <div className="flex md:flex-row flex-col items-start justify-between mf:p-20 py-12 px-4 w-full md:ml-16">
         <div className="flex flex-1 justify-start flex-col md:mr-10 text-white">
           <h1 className="text-3xl sm:text-5xl text-white text-gradient py-1">
             Send Crypto
@@ -59,9 +62,7 @@ export const HomePage = () => {
           <div className="grid sm:grid-cols-3 grid-cols-3 mt-10 w-full">
             <div className={`rounded-tl-2xl ${commonStyles}`}>Reliability</div>
             <div className={` ${commonStyles}`}>Security</div>
-            <div className={`rounded-tr-2xl ${commonStyles}`}>
-              Transaction Speeds
-            </div>
+            <div className={`rounded-tr-2xl ${commonStyles}`}>Custody</div>
             <div className={`rounded-bl-2xl ${commonStyles}`}>Blockchain</div>
             <div className={` ${commonStyles}`}>Web3</div>
             <div className={`rounded-br-2xl ${commonStyles}`}>Ethereum</div>
@@ -95,6 +96,19 @@ export const HomePage = () => {
                 handleChange={element.handleChange}
               />
             ))}
+            <div className="h-[1px] w-full bg-gray-400" />
+            {true ? (
+              <Spinner />
+            ) : (
+              <button
+                type="button"
+                onClick={handleSubmit}
+                className="text-white w-60 rounded-full bg-fuchsia-500 mt-3 hover:bg-fuchsia-800 border-[2px] p-2 border-[#3d4f7c]
+              "
+              >
+                Send Now
+              </button>
+            )}
           </div>
         </div>
       </div>
