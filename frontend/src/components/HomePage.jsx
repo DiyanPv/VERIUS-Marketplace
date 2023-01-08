@@ -1,48 +1,60 @@
-import { AiFillPlayCircle } from 'react-icons/ai'
-import { SiEthereum } from 'react-icons/si'
-import { InputForm } from './Form'
-import { BsInfoCircle } from 'react-icons/bs'
-import { Spinner } from './LoadingSpinner'
-import { ethers } from 'ethers'
+import { AiFillPlayCircle } from "react-icons/ai";
+import { SiEthereum } from "react-icons/si";
+import { InputForm } from "./Form";
+import { BsInfoCircle } from "react-icons/bs";
+import { Spinner } from "./LoadingSpinner";
+import { ethers } from "ethers";
+import { TransactionContext } from "../../context/context";
+import { useContext } from "react";
 export const HomePage = () => {
-  const provider = new ethers.providers.Web3Provider(window.ethereum)
-  let signer
+  const { connectWallet, account, sendTransaction, handleChange, formData } =
+    useContext(TransactionContext);
+  const { addressTo, message, amount, keyword } = formData;
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  let signer;
   const handleSubmit = (e) => {
-    e.preventDefault()
-  }
+    e.preventDefault();
+
+    console.log(formData);
+    console.log(amount, keyword, message);
+    if (!addressTo || !amount || !keyword || !message) {
+      return;
+    }
+    sendTransaction();
+  };
   const InputArray = [
     {
-      placeholder: 'Address To',
-      name: 'addressTo',
-      type: 'text',
-      handleChange: () => {},
+      placeholder: "Address To",
+      name: "addressTo",
+      type: "text",
+      value: addressTo,
+      key: 1,
     },
     {
-      placeholder: 'Enter Message',
-      name: 'message',
-      type: 'text',
-      handleChange: () => {},
+      placeholder: "Enter Message",
+      name: "message",
+      type: "text",
+      value: message,
+      key: 2,
     },
     {
-      placeholder: 'Amount (ETH)',
-      name: 'amount',
-      type: 'number',
-      handleChange: () => {},
+      placeholder: "Amount (ETH)",
+      name: "amount",
+      type: "number",
+      value: amount,
+      key: 3,
     },
     {
-      placeholder: 'Keyword',
-      name: 'keyword',
-      type: 'text',
-      handleChange: () => {},
+      placeholder: "Keyword",
+      name: "keyword",
+      type: "text",
+      value: keyword,
+      key: 4,
     },
-  ]
+  ];
   const commonStyles =
-    'min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white'
-  const connectWalet = async () => {
-    // ethers.connectWalet()
-    console.log(`Connecting to Wallet`)
-    signer = await provider.getSigner()
-  }
+    "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white";
+
   return (
     <div className="flex w-full justify-center items-center">
       <div className="flex md:flex-row flex-col items-start justify-between mf:p-20 py-12 px-4 w-full md:ml-16">
@@ -55,13 +67,15 @@ export const HomePage = () => {
             Explore the new Web3 world with Verius. Your gateaway to financial
             freedom.
           </p>
-          <button
-            type="button"
-            onClick={connectWalet}
-            className="font-semibold text-base text-white flex flex-row justify-center items-center my-5 bg-[#2952e3] p3 rounded-full cursor-pointer md:w-6/12 hover:bg-[#2546bd] italic h-12"
-          >
-            Connect Wallet
-          </button>
+          {!account && (
+            <button
+              type="button"
+              onClick={connectWallet}
+              className="font-semibold text-base text-white flex flex-row justify-center items-center my-5 bg-[#2952e3] p3 rounded-full cursor-pointer md:w-6/12 hover:bg-[#2546bd] italic h-12"
+            >
+              Connect Wallet
+            </button>
+          )}
           <div className="grid sm:grid-cols-3 grid-cols-3 mt-10 w-full">
             <div className={`rounded-tl-2xl ${commonStyles}`}>Reliability</div>
             <div className={` ${commonStyles}`}>Security</div>
@@ -93,14 +107,15 @@ export const HomePage = () => {
             {InputArray.map((element) => (
               <InputForm
                 placeholder={element.placeholder}
-                key={Math.random() + element + Math.random(10)}
                 name={element.name}
                 type={element.type}
-                handleChange={element.handleChange}
+                handleChange={handleChange}
+                value={element.value}
+                key={element.name}
               />
             ))}
             <div className="h-[1px] w-full bg-gray-400" />
-            {true ? (
+            {false ? (
               <Spinner />
             ) : (
               <button
@@ -116,5 +131,5 @@ export const HomePage = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

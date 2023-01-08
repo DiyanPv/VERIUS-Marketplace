@@ -6,7 +6,7 @@ export const InputForm = ({ placeholder, name, type, value, handleChange }) => {
       name={name}
       type={type}
       value={value}
-      handleChange={handleChange}
+      onChange={(e) => handleChange(e, name)}
     ></input>
-  )
-}
+  );
+};

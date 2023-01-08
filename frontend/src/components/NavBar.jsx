@@ -1,13 +1,13 @@
-import { useState } from 'react'
-import { AiOutlineClose } from 'react-icons/ai'
-import { HiMenuAlt4 } from 'react-icons/hi'
-import logo from '../../images/logo.png'
+import { useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import { HiMenuAlt4 } from "react-icons/hi";
+import logo from "../../images/logo.png";
 const NavBarItem = ({ title, classProps }) => {
-  return <li className={`mx-4 cursor-pointer ${classProps}`}>{title}</li>
-}
+  return <li className={`mx-4 cursor-pointer ${classProps}`}>{title}</li>;
+};
 export const NavBar = () => {
-  const NavBarItems = ['Market', 'Exchange', 'Wallet', 'Tutorial']
-  const [toggleMenu, setToggleMenu] = useState(false)
+  const NavBarItems = ["Market", "Exchange", "Wallet", "Tutorial"];
+  const [toggleMenu, setToggleMenu] = useState(false);
   return (
     <nav className="w-full flex md:justify-center justify-between items-center p-4">
       <div className="md:flex-[0.9] flex-initial justify-center">
@@ -31,7 +31,7 @@ export const NavBar = () => {
             fontSize={28}
             className="text-white md:hidden cursor-pointer"
             onClick={() => {
-              setToggleMenu(false)
+              setToggleMenu(false);
             }}
           />
         ) : (
@@ -39,16 +39,16 @@ export const NavBar = () => {
             fontSize={28}
             className="text-white md:hidden cursor-pointer"
             onClick={() => {
-              setToggleMenu(true)
+              setToggleMenu(true);
             }}
           />
         )}
         {toggleMenu && (
-          <ul className='z-10 fixed top-0 right-2 p-3 w-[70vw] h-screen shadow-2xl md:hidden list-none flex flex-col justify-start items-end rounder-md blue-glassmorphism animate-slide-in'>
+          <ul className="z-10 fixed top-0 right-2 p-3 w-[70vw] h-screen shadow-2xl flex flex-col justify-start items-end rounder-md blue-glassmorphism">
             <li className="text-xl text-white w-full my-2">
               <AiOutlineClose
                 onClick={() => {
-                  setToggleMenu(false)
+                  setToggleMenu(false);
                 }}
               />
             </li>
@@ -56,12 +56,12 @@ export const NavBar = () => {
               <NavBarItem
                 key={item + index}
                 title={item}
-                classProps={'my-3 text-lg text-white'}
+                classProps={"my-3 text-lg text-white"}
               />
             ))}
           </ul>
         )}
       </div>
     </nav>
-  )
-}
+  );
+};
