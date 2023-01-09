@@ -7,16 +7,20 @@ import { ethers } from "ethers";
 import { TransactionContext } from "../../context/context";
 import { useContext } from "react";
 export const HomePage = () => {
-  const { connectWallet, account, sendTransaction, handleChange, formData } =
-    useContext(TransactionContext);
+  const {
+    connectWallet,
+    account,
+    sendTransaction,
+    handleChange,
+    formData,
+    transactionCount,
+    isLoading,
+  } = useContext(TransactionContext);
   const { addressTo, message, amount, keyword } = formData;
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   let signer;
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log(formData);
-    console.log(amount, keyword, message);
     if (!addressTo || !amount || !keyword || !message) {
       return;
     }
@@ -99,7 +103,11 @@ export const HomePage = () => {
                 <p className="text-white font-semibold font-light text-sm">
                   Address:
                 </p>
-                <p className="text-white font-light text-sm">0xsa....sdsds</p>
+                <p className="text-white font-light text-sm">
+                  {`${String(account).substring(0, 7)}...${String(
+                    account
+                  ).substring(20)}`}
+                </p>
               </div>
             </div>
           </div>
@@ -115,7 +123,7 @@ export const HomePage = () => {
               />
             ))}
             <div className="h-[1px] w-full bg-gray-400" />
-            {false ? (
+            {isLoading ? (
               <Spinner />
             ) : (
               <button
