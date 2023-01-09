@@ -16,7 +16,7 @@ export const Services = () => {
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col justify-start items-center">
+      <div className="flex flex-1 flex-col justify-start items-center mr-4">
         <ServiceCard
           color="bg-[#2952E3]"
           title="Security"
