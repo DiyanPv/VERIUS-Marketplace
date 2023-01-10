@@ -22,7 +22,6 @@ export const Transactions = () => {
           {dummyData.map((el) => (
             <TransactionCard key={el.id} {...el} />
           ))}
-          
         </div>
       </div>
     </div>

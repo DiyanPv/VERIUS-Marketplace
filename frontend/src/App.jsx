@@ -8,15 +8,17 @@ import { useState } from "react";
 const App = () => {
   const [modalisOpen, setModalisOpen] = useState(false);
   return (
-    <div className="min-h-screen">
-      <div className="gradient-bg-welcome">
-        <NavBar setModalisOpen={setModalisOpen} modalisOpen={modalisOpen} />
-        {modalisOpen && <LoginModal />}
-        <HomePage />
+    <div>
+      <div className={`min-h-screen ${modalisOpen && `opacity-70`}`}>
+        <div className="gradient-bg-welcome">
+          <NavBar setModalisOpen={setModalisOpen} modalisOpen={modalisOpen} />
+          <HomePage />
+        </div>
+        <Services />
+        <Transactions />
+        <Footer />
       </div>
-      <Services />
-      <Transactions />
-      <Footer />
+      {modalisOpen && <LoginModal />}
     </div>
   );
 };
