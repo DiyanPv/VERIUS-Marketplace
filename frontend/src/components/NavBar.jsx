@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { HiMenuAlt4 } from "react-icons/hi";
@@ -5,9 +6,10 @@ import logo from "../../images/logo.png";
 const NavBarItem = ({ title, classProps }) => {
   return <li className={`mx-4 cursor-pointer ${classProps}`}>{title}</li>;
 };
-export const NavBar = () => {
+export const NavBar = ({ setModalisOpen, modalisOpen }) => {
   const NavBarItems = ["Market", "Exchange", "Wallet", "Tutorial"];
   const [toggleMenu, setToggleMenu] = useState(false);
+
   return (
     <nav className="w-full flex md:justify-center justify-between items-center p-4">
       <div className="md:flex-[0.9] flex-initial justify-center">
@@ -21,7 +23,13 @@ export const NavBar = () => {
         {NavBarItems.map((item, index) => (
           <NavBarItem key={item + index} title={item} />
         ))}
-        <li className="bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546bd]">
+        <li
+          className="bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546bd]"
+          onClick={() => {
+            console.log(`true`);
+            setModalisOpen(!modalisOpen);
+          }}
+        >
           Login
         </li>
       </ul>

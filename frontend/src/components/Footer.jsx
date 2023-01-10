@@ -16,10 +16,10 @@ export const Footer = () => {
       <div className="flex justify-center items-center flex-col mt-5">
         <p className="text-white text-2xl text-center mb-3">Contact us at</p>
         <a href="mailto:support@verius.com">
-          <p className="text-white text-sm text-center flex flex-row hover:cursor-pointer">
+          <div className="text-white text-sm text-center flex flex-row hover:cursor-pointer">
             <AiOutlineMail fontSize={23} className="flex flex-row mr-1 " />
             <p>support@verius.com</p>
-          </p>
+          </div>
         </a>
       </div>
       <div className="sm:w-[90%] w-full h-[0.25px] bg-gray-400 mt-5 mb-5"></div>

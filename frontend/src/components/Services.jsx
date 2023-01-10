@@ -27,7 +27,7 @@ export const Services = () => {
           color="bg-[#8945F8]"
           title="Ownership"
           icon={<BiSearchAlt fontSize={21} className="text-white" />}
-          subtitle="As a custodial solution, you are the only one that has access to your assets"
+          subtitle="As a non-custodial solution, you are the only one that has access to your assets"
         />
         <ServiceCard
           color="bg-[#F84550]"

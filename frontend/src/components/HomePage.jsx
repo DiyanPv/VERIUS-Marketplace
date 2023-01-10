@@ -83,7 +83,7 @@ export const HomePage = () => {
           <div className="grid sm:grid-cols-3 grid-cols-3 mt-10 w-full">
             <div className={`rounded-tl-2xl ${commonStyles}`}>Reliability</div>
             <div className={` ${commonStyles}`}>Security</div>
-            <div className={`rounded-tr-2xl ${commonStyles}`}>Custody</div>
+            <div className={`rounded-tr-2xl ${commonStyles}`}>Self-Custody</div>
             <div className={`rounded-bl-2xl ${commonStyles}`}>Blockchain</div>
             <div className={` ${commonStyles}`}>Web3</div>
             <div className={`rounded-br-2xl ${commonStyles}`}>Ethereum</div>

@@ -32,6 +32,7 @@ export const TransactionProvider = ({ children }) => {
     setFormData((prevState) => ({ ...prevState, [name]: e.target.value }));
   };
 
+  
   const sendTransaction = async () => {
     try {
       if (!ethereum) {
