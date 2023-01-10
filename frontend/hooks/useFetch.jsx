@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { GIPHY_API } from "../utils/constants";
 
-const useFetch = (keyword) => {
+export const useFetch = (keyword) => {
   const [gifUrl, setGifUrl] = useState();
   const fetchGifs = async () => {
     try {
@@ -28,5 +28,3 @@ const useFetch = (keyword) => {
   }),
     [keyword];
 };
-
-export default useFetch;
