@@ -32,7 +32,11 @@ export const TransactionProvider = ({ children }) => {
     setFormData((prevState) => ({ ...prevState, [name]: e.target.value }));
   };
 
-  
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
+
   const sendTransaction = async () => {
     try {
       if (!ethereum) {
@@ -84,7 +88,20 @@ export const TransactionProvider = ({ children }) => {
 
   useEffect(() => {
     connectWallet();
+    checkTransactions();
   }, []);
+
+  const checkTransactions = async () => {
+    try {
+      const contract = getEthereumContract();
+      const transactionCount = await contract.getTransactionCount();
+      transactionCount.wait(1);
+      localStorage.setItem("tranasctionCount", tranasctionCount);
+      return transactionCount;
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <TransactionContext.Provider
       value={{
@@ -96,6 +113,8 @@ export const TransactionProvider = ({ children }) => {
         sendTransaction,
         isLoading,
         transactionCount,
+        loginData,
+        setLoginData,
       }}
     >
       {children}

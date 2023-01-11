@@ -6,6 +6,9 @@ import { Spinner } from "./LoadingSpinner";
 import { ethers } from "ethers";
 import { TransactionContext } from "../../context/context";
 import { useContext } from "react";
+
+
+
 export const HomePage = () => {
   const {
     connectWallet,
@@ -15,17 +18,11 @@ export const HomePage = () => {
     formData,
     transactionCount,
     isLoading,
+    
   } = useContext(TransactionContext);
   const { addressTo, message, amount, keyword } = formData;
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   let signer;
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!addressTo || !amount || !keyword || !message) {
-      return;
-    }
-    sendTransaction();
-  };
   const InputArray = [
     {
       placeholder: "Address To",
@@ -56,6 +53,14 @@ export const HomePage = () => {
       key: 4,
     },
   ];
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!addressTo || !amount || !keyword || !message) {
+      return;
+    }
+    sendTransaction();
+  };
+
   const commonStyles =
     "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white";
 

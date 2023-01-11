@@ -21,7 +21,7 @@ export const Services = () => {
           color="bg-[#2952E3]"
           title="Security"
           icon={<BsShieldFillCheck fontSize={21} className="text-white" />}
-          subtitle="Privacy and quality of our products is maintained"
+          subtitle="Privacy and quality of our products remain unmatched"
         />
         <ServiceCard
           color="bg-[#8945F8]"
@@ -33,7 +33,7 @@ export const Services = () => {
           color="bg-[#F84550]"
           title="Trustless"
           icon={<RiHeart2Fill fontSize={21} className="text-white" />}
-          subtitle="The most trusted platform in the Web3 space"
+          subtitle="The largest and most trusted platform in the Web3 space"
         />
       </div>
     </div>

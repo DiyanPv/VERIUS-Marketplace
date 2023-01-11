@@ -1,12 +1,17 @@
+import { useContext } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { HiMenuAlt4 } from "react-icons/hi";
+import { TransactionContext } from "../../context/context";
 import logo from "../../images/logo.png";
+
 const NavBarItem = ({ title, classProps }) => {
   return <li className={`mx-4 cursor-pointer ${classProps}`}>{title}</li>;
 };
 export const NavBar = ({ setModalisOpen, modalisOpen }) => {
+  const email = localStorage.getItem(`email`);
+  const password = localStorage.getItem(`password`);
   const NavBarItems = ["Market", "Exchange", "Wallet", "Tutorial"];
   const [toggleMenu, setToggleMenu] = useState(false);
 
@@ -23,15 +28,19 @@ export const NavBar = ({ setModalisOpen, modalisOpen }) => {
         {NavBarItems.map((item, index) => (
           <NavBarItem key={item + index} title={item} />
         ))}
-        <li
-          className="bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546bd]"
-          onClick={() => {
-            console.log(`true`);
-            setModalisOpen(!modalisOpen);
-          }}
-        >
-          Login
-        </li>
+        {email && password ? (
+          ``
+        ) : (
+          <li
+            className="bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546bd]"
+            onClick={() => {
+              console.log(`true`);
+              setModalisOpen(!modalisOpen);
+            }}
+          >
+            Login
+          </li>
+        )}
       </ul>
       <div className="flex relative">
         {toggleMenu ? (
