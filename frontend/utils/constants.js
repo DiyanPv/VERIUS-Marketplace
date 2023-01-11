@@ -56,3 +56,8 @@ export const dummyData = [
   },
 ];
 
+export const addressShortener = (account) => {
+  const before = String(account).substring(0, 5);
+  const after = String(account).substring(38);
+  return `${before}...${after}`;
+};

@@ -1,4 +1,4 @@
-import { addressShortener } from "../../utils/addressShortener";
+import { addressShortener } from "../../utils/constants";
 import { useFetch } from "../../hooks/useFetch";
 import { useEffect } from "react";
 export const TransactionCard = ({
