@@ -4,7 +4,7 @@ const { ethereum } = window;
 import { abi } from "../utils/TransfersAbi.json";
 const contractAddress = `0xB648499d759f60f6e40f493c5b843Cb8DAD92fd6`;
 export const TransactionContext = createContext();
-
+let transactionsFromBlockchain;
 const getEthereumContract = () => {
   const provider = new ethers.providers.Web3Provider(ethereum);
   const signer = provider.getSigner();
@@ -15,6 +15,7 @@ const getEthereumContract = () => {
 };
 
 export const TransactionProvider = ({ children }) => {
+  const [transactions, setTransactions] = useState();
   const [account, setAccount] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [transactionCount, setTransactionCount] = useState(
@@ -46,17 +47,17 @@ export const TransactionProvider = ({ children }) => {
       const contract = getEthereumContract();
       //up until here everything is fine
       console.log(`Amount is : ${ethers.utils.parseEther(amount)._hex}`);
-      // await ethereum.request({
-      //   method: "eth_sendTransaction",
-      //   params: [
-      //     {
-      //       from: account,
-      //       to: addressTo,
-      //       value: ethers.utils.parseEther(amount)._hex,
-      //       gas: "0x5208",
-      //     },
-      //   ],
-      // });
+      await ethereum.request({
+        method: "eth_sendTransaction",
+        params: [
+          {
+            from: account,
+            to: addressTo,
+            value: ethers.utils.parseEther(amount)._hex,
+            gas: "0x5208",
+          },
+        ],
+      });
       setIsLoading(true);
       const transactioNHash = await contract.addToBlockchain(
         addressTo,
@@ -72,6 +73,7 @@ export const TransactionProvider = ({ children }) => {
       console.log(transactionCount);
       localStorage.setItem("transactionCount", Number(transactionCount));
       setTransactionCount(Number(transactionCount));
+      window.reload();
     } catch (error) {
       console.log(error);
     }
@@ -84,20 +86,44 @@ export const TransactionProvider = ({ children }) => {
     const accounts = await ethereum.request({ method: "eth_requestAccounts" });
     console.log(accounts);
     setAccount(accounts[0]);
+    getAllTransactions();
   };
 
   useEffect(() => {
     connectWallet();
     checkTransactions();
+    getAllTransactions();
   }, []);
 
   const checkTransactions = async () => {
     try {
       const contract = getEthereumContract();
       const transactionCount = await contract.getTransactionCount();
-      transactionCount.wait(1);
-      localStorage.setItem("tranasctionCount", tranasctionCount);
-      return transactionCount;
+      localStorage.removeItem("tranasctionCount");
+
+      localStorage.setItem("tranasctionCount", transactionCount);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getAllTransactions = async () => {
+    try {
+      if (!ethereum) return alert(`Install MetaMask`);
+      const contract = getEthereumContract();
+      const tranasctions = await contract.getTransactions();
+      console.log(tranasctions);
+      const structuredTransaction = tranasctions.map((e) => ({
+        adddressFrom: e.receiver,
+        addressTo: e.sender,
+        timestamp: new Date(e.timestamp.toNumber() * 1000).toLocaleString(),
+        message: e.message,
+        keyword: e.keyword,
+        amount: parseInt(e.amount._hex) / 10 ** 18,
+        id: e.timestamp + e.message,
+      }));
+      transactionsFromBlockchain = structuredTransaction;
+      setTransactions(transactionsFromBlockchain);
     } catch (error) {
       console.log(error);
     }
@@ -115,6 +141,7 @@ export const TransactionProvider = ({ children }) => {
         transactionCount,
         loginData,
         setLoginData,
+        transactions,
       }}
     >
       {children}

@@ -4,8 +4,7 @@ import { dummyData } from "../../utils/constants.js";
 import { TransactionCard } from "./TransactionCard";
 
 export const Transactions = () => {
-  const { account } = useContext(TransactionContext);
-
+  const { account, transactions } = useContext(TransactionContext);
   return (
     <div className="flex w-full justify-center items-center 2xl:px-20 gradient-bg-transactions">
       <div className="flex flex-col md:p-12 py-12 px-4">
@@ -19,7 +18,7 @@ export const Transactions = () => {
           </h3>
         )}
         <div className="flex flex-wrap justify-center items-center mt-10 text-white">
-          {dummyData.map((el) => (
+          {(transactions || dummyData).map((el) => (
             <TransactionCard key={el.id} {...el} />
           ))}
         </div>

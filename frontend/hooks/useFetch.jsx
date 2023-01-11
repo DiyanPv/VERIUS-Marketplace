@@ -11,7 +11,7 @@ export const useFetch = (keyword) => {
           .join(``)}&limit=1`
       );
       const { data } = await response.json();
-      setGifUrl(data[0]?.images?.downsized_medium?.url);
+      setGifUrl(data[0]?.images.downsized_medium.url);
     } catch (error) {
       setGifUrl(
         `https://giphy.com/gifs/crypto-ethereum-eth-MagSgolK3ScWvtHAB4`
@@ -24,7 +24,6 @@ export const useFetch = (keyword) => {
     if (keyword) {
       fetchGifs();
     }
-    return gifUrl;
-  }),
-    [keyword];
+  }, [keyword]);
+  return gifUrl;
 };
