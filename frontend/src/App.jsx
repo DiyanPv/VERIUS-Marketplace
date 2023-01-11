@@ -9,7 +9,7 @@ const App = () => {
   const [modalisOpen, setModalisOpen] = useState(false);
   return (
     <div>
-      <div className={`min-h-screen ${modalisOpen && `opacity-70`}`}>
+      <div className={`min-h-screen ${modalisOpen && `opacity-70 pointer-events-none`}`}>
         <div className="gradient-bg-welcome">
           <NavBar setModalisOpen={setModalisOpen} modalisOpen={modalisOpen} />
           <HomePage />
@@ -18,7 +18,7 @@ const App = () => {
         <Transactions />
         <Footer />
       </div>
-      {modalisOpen && <LoginModal />}
+      {modalisOpen && <LoginModal setModalisOpen={setModalisOpen} modalisOpen={modalisOpen} />}
     </div>
   );
 };
