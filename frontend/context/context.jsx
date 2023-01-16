@@ -6,12 +6,19 @@ const contractAddress = `0xB648499d759f60f6e40f493c5b843Cb8DAD92fd6`;
 export const TransactionContext = createContext();
 let transactionsFromBlockchain;
 const getEthereumContract = () => {
-  const provider = new ethers.providers.Web3Provider(ethereum);
-  const signer = provider.getSigner();
-  console.log(abi);
-  const transactionContract = new ethers.Contract(contractAddress, abi, signer);
-  console.log(`Address is : ${transactionContract.address}`);
-  return transactionContract;
+  let provider;
+  if (window.ethereum) {
+    provider = new ethers.providers.Web3Provider(ethereum);
+    const signer = provider.getSigner();
+    console.log(abi);
+    const transactionContract = new ethers.Contract(
+      contractAddress,
+      abi,
+      signer
+    );
+    console.log(`Address is : ${transactionContract.address}`);
+    return transactionContract;
+  }
 };
 
 export const TransactionProvider = ({ children }) => {
@@ -71,6 +78,7 @@ export const TransactionProvider = ({ children }) => {
       console.log(transactioNHash);
       const transactionCount = await contract.getTransactionCount();
       console.log(transactionCount);
+
       localStorage.setItem("transactionCount", Number(transactionCount));
       setTransactionCount(Number(transactionCount));
       window.reload();
@@ -109,7 +117,7 @@ export const TransactionProvider = ({ children }) => {
 
   const getAllTransactions = async () => {
     try {
-      if (!ethereum) return alert(`Install MetaMask`);
+      if (!ethereum) return;
       const contract = getEthereumContract();
       const tranasctions = await contract.getTransactions();
       console.log(tranasctions);

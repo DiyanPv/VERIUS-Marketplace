@@ -7,8 +7,6 @@ import { ethers } from "ethers";
 import { TransactionContext } from "../../context/context";
 import { useContext } from "react";
 
-
-
 export const HomePage = () => {
   const {
     connectWallet,
@@ -18,10 +16,12 @@ export const HomePage = () => {
     formData,
     transactionCount,
     isLoading,
-    
   } = useContext(TransactionContext);
   const { addressTo, message, amount, keyword } = formData;
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  let provider;
+  if (window.ethereum) {
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+  }
   let signer;
   const InputArray = [
     {
