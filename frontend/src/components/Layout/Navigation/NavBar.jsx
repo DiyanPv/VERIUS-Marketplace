@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { HiMenuAlt4 } from "react-icons/hi";
-import { TransactionContext } from "../../context/context";
-import logo from "../../images/logo.png";
+import { TransactionContext } from "../../../../context/context";
+import logo from "../../../../images/logo.png"
 
 const NavBarItem = ({ title, classProps }) => {
   return <li className={`mx-4 cursor-pointer ${classProps}`}>{title}</li>;

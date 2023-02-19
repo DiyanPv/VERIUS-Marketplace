@@ -1,10 +1,10 @@
 import { AiFillPlayCircle } from "react-icons/ai";
 import { SiEthereum } from "react-icons/si";
-import { InputForm } from "./Form";
+import { InputForm } from "../Form";
 import { BsInfoCircle } from "react-icons/bs";
-import { Spinner } from "./LoadingSpinner";
+import { Spinner } from "../Spinner/LoadingSpinner";
 import { ethers } from "ethers";
-import { TransactionContext } from "../../context/context";
+import { TransactionContext } from "../../../context/context";
 import { useContext } from "react";
 
 export const HomePage = () => {

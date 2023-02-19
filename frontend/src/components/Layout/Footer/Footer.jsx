@@ -1,4 +1,4 @@
-import logo from "../../images/logo.png";
+import logo from "../../../../images/logo.png"
 import { AiOutlineMail } from "react-icons/ai";
 export const Footer = () => {
   return (

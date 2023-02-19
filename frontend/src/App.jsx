@@ -1,6 +1,6 @@
-import { Footer } from "./components/Footer";
-import { HomePage } from "./components/HomePage";
-import { NavBar } from "./components/NavBar";
+import { Footer } from "./components/Layout/Footer/Footer";
+import { HomePage } from "./components/pages/HomePage";
+import { NavBar } from "./components/Layout/Navigation/NavBar";
 import { Services } from "./components/Services";
 import { Transactions } from "./components/Transactions";
 import { LoginModal } from "./components/Form";
