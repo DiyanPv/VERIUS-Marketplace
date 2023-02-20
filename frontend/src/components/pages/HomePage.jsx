@@ -109,9 +109,9 @@ export const HomePage = () => {
                   Address:
                 </p>
                 <p className="text-white font-light text-sm">
-                  {`${String(account).substring(0, 7)}...${String(
+                  {account? `${String(account).substring(0, 7)}...${String(
                     account
-                  ).substring(20)}`}
+                  ).substring(20)}` : `Not Connected to Metamask`}
                 </p>
               </div>
             </div>
